@@ -47,7 +47,11 @@ python crawl.py -i 0,1,2,3,4
 - An id file contains 6.6k documents, and a document needs to be rendered three times. It takes about 8 hours, depending on the speed of the network.
 
 # pool
-0-179
+0-174
 
-* 180-182 thanks to ws
-* 183,184 thanks to mxy
+# data path
+* 175~179, thinkpad
+* 180~182, thanks to ws
+* 183~184, thanks to mxy
+* 185~189, mbp
+* 190~199, pc
