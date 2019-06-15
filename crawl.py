@@ -13,11 +13,13 @@ web_prefix = 'https://www.quora.com%s'
 # driver = webdriver.PhantomJS()
 driver = webdriver.Chrome()
 
+
 def question2url(question):
     query = urllib.parse.quote(question)
     query.replace('%20', '+')
     url = search_prefix % query
     return url
+
 
 def get_question_link(url):
     driver.get(url)
@@ -31,9 +33,11 @@ def get_question_link(url):
             link = web_prefix % title.find('a', href=True)['href']
             return link
 
+
 def clean_date(date):
     date = date.replace('Answered', '').strip()
     return date
+
 
 def get_answer_info(link):
     driver.get(link)
@@ -52,6 +56,7 @@ def get_answer_info(link):
         'downvotes': downvotes
     }
 
+
 def get_question_info(link):
     driver.get(link)
     thread = BeautifulSoup(driver.page_source, 'lxml')
@@ -67,14 +72,18 @@ def get_question_info(link):
                 answer_links.add(item['href'])
     answers = []
     for answer_link in answer_links:
-        answer_link = web_prefix % answer_link
-        answer = get_answer_info(answer_link)
-        answers.append(answer)
+        try:
+            answer_link = web_prefix % answer_link
+            answer = get_answer_info(answer_link)
+            answers.append(answer)
+        except:
+            continue
     return {
         'link': link,
         'question': question,
         'answers': answers
     }
+
 
 def crawl(question):
     url = question2url(question)
@@ -82,13 +91,14 @@ def crawl(question):
     data = get_question_info(link)
     return data
 
+
 if __name__ == "__main__":
     prefix = 'questions/chunk_%s.tsv'
     output = 'crawled/chunk_%s.tsv'
     assert os.path.exists('crawled'), 'Please create dir `crawled` first.'
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--ids', '-i', type=str, help='Chunk ids to be crawled. For single id, please input as `0`, for multi-ids, please input as `0,1,2,3`.')
+    parser.add_argument('--ids', '-i', type=str, help='Chunk ids to be crawled.')
     args = parser.parse_args()
 
     ids = args.ids.strip().split(',')
@@ -96,8 +106,9 @@ if __name__ == "__main__":
         try:
             num_idx = int(idx)
             assert 200 > num_idx >= 0
+            print('Crawling {idx} ...')
         except:
-            print(f"{idx} is not a true id., Please input id from 0 to 199.")
+            print(f"{idx} is not a true id.\nPlease input id from 0 to 199.")
             continue
         with codecs.open(prefix % idx, 'r', encoding='utf8') as f:
             lines = f.readlines()
