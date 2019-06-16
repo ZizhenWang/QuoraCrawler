@@ -43,15 +43,16 @@ python crawl.py -i 0,1,2,3,4
 - python version is 3.6
 - 如果你准备或已经运行了部分数据的爬虫，请将对应的id邮件告知我或通过issue提交，避免重复采集，再次感谢你的帮助！
 - If you are ready to run some ids' crawler, please informs me by email or issue to avoid duplicate crawling, thanks for your help again! 
-- 一个id对应的文件包含6.6k篇文档，一篇文档需要进行三次渲染，大概需要8h，具体用时视网速而定.
+- 一个id对应的文件包含6.6k篇文档，一篇文档需要进行三次渲染，大概需要6h，具体用时视网速而定.
 - An id file contains 6.6k documents, and a document needs to be rendered three times. It takes about 8 hours, depending on the speed of the network.
 
 # pool
-0-174
+10~179
 
 # data path
-* 175~179, thinkpad
+* 0~3, mbp
+* 4~9, thinkpad
 * 180~182, thanks to ws
 * 183~184, thanks to mxy
-* 185~189, mbp
+* 185, mbp
 * 190~199, pc

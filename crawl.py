@@ -7,11 +7,19 @@ from tqdm import tqdm
 import urllib
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+
+# for linux
+
+
+# for chrome
+chrome_options = Options()
+chrome_options.add_argument('blink-settings=imagesEnabled=false')  # no photo
+chrome_options.add_argument('--headless')  # no ui
+driver = webdriver.Chrome(chrome_options=chrome_options)
 
 search_prefix = 'https://www.quora.com/search?q=%s'
 web_prefix = 'https://www.quora.com%s'
-# driver = webdriver.PhantomJS()
-driver = webdriver.Chrome()
 
 
 def question2url(question):
@@ -106,15 +114,24 @@ if __name__ == "__main__":
         try:
             num_idx = int(idx)
             assert 200 > num_idx >= 0
-            print('Crawling {idx} ...')
+            print(f'Crawling {idx} ...')
         except:
             print(f"{idx} is not a true id.\nPlease input id from 0 to 199.")
             continue
         with codecs.open(prefix % idx, 'r', encoding='utf8') as f:
             lines = f.readlines()
-        with codecs.open(output % idx, 'w', encoding='utf8') as w:
+        crawled_ids = set()
+        try:
+            with codecs.open(output % idx, 'r', encoding='utf8') as f:
+                crawled_ids = set([line.split('\t')[0] for line in f.readlines()])
+            print(f'Load {len(crawled_ids)} documents from {output % idx}')
+        except:
+            pass
+        with codecs.open(output % idx, 'a', encoding='utf8') as w:
             for line in tqdm(lines):
                 qid, question = line.strip().split('\t')
+                if qid in crawled_ids:
+                    continue
                 try:
                     crawled = crawl(question)
                     crawled['qid'] = qid
@@ -123,5 +140,6 @@ if __name__ == "__main__":
                     print('='*40)
                     print(qid, e)
                     continue
+    driver.close()
     driver.quit()
 
