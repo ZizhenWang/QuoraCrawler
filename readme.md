@@ -54,6 +54,7 @@ python crawl.py -i 0,1,2,3,4
 * 4~9, thinkpad
 * 10~14, mbp
 * 15~19, x1 carbon
+* 20~29, 185
 * 180~182, thanks to ws
 * 183~184, thanks to mxy
 * 185, mbp
