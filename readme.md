@@ -50,13 +50,13 @@ python crawl.py -i 0,1,2,3,4
 40~179
 
 # data path
-* 0~3, mbp
-* 4~9, thinkpad
-* 10~14, mbp
-* 15~19, x1 carbon
-* 20~29, 185
-* 30~39, mbp
-* 180~182, thanks to ws
-* 183~184, thanks to mxy
-* 185, mbp
-* 190~199, pc
+|range|path|state|
+|:---:|:---:|:---:|
+|0,3|mbp|done|
+|4,9|carbon|in progress|
+|10,14|mbp|done|
+|15,19|carbon|in progress|
+|20,29|185||
+|30,39|mbp||
+|185|mbp||
+|190,199|pc|in progress|

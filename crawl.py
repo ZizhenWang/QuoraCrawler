@@ -18,6 +18,10 @@ chrome_options.add_argument('blink-settings=imagesEnabled=false')  # no photo
 chrome_options.add_argument('--headless')  # no ui
 driver = webdriver.Chrome(chrome_options=chrome_options)
 
+# set max wait time
+driver.set_page_load_timeout(10)
+driver.set_script_timeout(10)
+
 search_prefix = 'https://www.quora.com/search?q=%s'
 web_prefix = 'https://www.quora.com%s'
 
