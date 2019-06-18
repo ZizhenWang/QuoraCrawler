@@ -16,6 +16,8 @@ from selenium.webdriver.chrome.options import Options
 chrome_options = Options()
 chrome_options.add_argument('blink-settings=imagesEnabled=false')  # no photo
 chrome_options.add_argument('--headless')  # no ui
+chrome_options.add_argument('--no-sandbox')
+chrome_options.add_argument('--disable-gpu')
 driver = webdriver.Chrome(chrome_options=chrome_options)
 
 # set max wait time
