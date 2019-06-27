@@ -21,8 +21,8 @@ chrome_options.add_argument('--disable-gpu')
 driver = webdriver.Chrome(chrome_options=chrome_options)
 
 # set max wait time
-driver.set_page_load_timeout(10)
-driver.set_script_timeout(10)
+driver.set_page_load_timeout(5)
+driver.set_script_timeout(5)
 
 search_prefix = 'https://www.quora.com/search?q=%s'
 web_prefix = 'https://www.quora.com%s'
@@ -62,12 +62,9 @@ def get_answer_info(link):
     for item in page.find_all('span', {'class': 'ui_qtext_rendered_qtext'}):
         if item.find_all('p'):
             content = item.get_text()
-    upvotes, downvotes = 0, 0
     return {
         'date': date,
-        'content': content,
-        'upvotes': upvotes,
-        'downvotes': downvotes
+        'content': content
     }
 
 
@@ -94,7 +91,7 @@ def get_question_info(link):
             continue
     return {
         'link': link,
-        'question': question,
+        'search_question': question,
         'answers': answers
     }
 
@@ -122,7 +119,7 @@ if __name__ == "__main__":
             assert 200 > num_idx >= 0
             print(f'Crawling {idx} ...')
         except:
-            print(f"{idx} is not a true id.\nPlease input id from 0 to 199.")
+            print(f"{idx} is not a true id.\nPlease input id from 0 to 89.")
             continue
         with codecs.open(prefix % idx, 'r', encoding='utf8') as f:
             lines = f.readlines()
@@ -141,7 +138,8 @@ if __name__ == "__main__":
                 try:
                     crawled = crawl(question)
                     crawled['qid'] = qid
-                    w.write(f"{qid}\t{crawled}\n")
+                    crawled['question'] = question
+                    w.write("%s\n" % json.dumps(crawled))
                 except BaseException as e:
                     print('='*40)
                     print(qid, e)

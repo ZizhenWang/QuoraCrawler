@@ -56,7 +56,8 @@ python crawl.py -i 0,1,2,3,4
 |4,9|carbon|in progress|
 |10,14|mbp|done|
 |15,19|carbon|in progress|
-|20,29|185||
-|30,39|mbp||
-|185|mbp||
+|20,29|185|in progress|
+|30,39|mbp|in progress|
+|81|-------|***train/test boundary***|
+|185|mbp|in progress|
 |190,199|pc|in progress|
