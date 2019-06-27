@@ -59,6 +59,8 @@ python crawl.py -i 0,1,2,3,4
 2. 更新了部分爬取代码
 
 # deprecated records
+|range|path|state|
+|:---:|:---:|:---:|
 |0,3|mbp|done|
 |4,9|carbon|in progress|
 |10,14|mbp|done|

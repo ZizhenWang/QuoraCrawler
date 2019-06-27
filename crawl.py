@@ -142,7 +142,7 @@ if __name__ == "__main__":
                     w.write("%s\n" % json.dumps(crawled))
                 except BaseException as e:
                     print('='*40)
-                    print(qid, e)
+                    print("%s\t%s" % (qid, e))
                     continue
     driver.close()
     driver.quit()
