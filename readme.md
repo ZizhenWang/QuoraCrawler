@@ -52,7 +52,13 @@ python crawl.py -i 0,1,2,3,4
 # data path
 |range|path|state|
 |:---:|:---:|:---:|
-|||
+|0,1|local|
+|2~9|tp|
+|10~19|yl||
+|20~29|lili|
+|30~39|vm|
+|50~59|wlh|
+|60~64|local|
 
 # ** 06.27 updates
 1. 更新了待爬取的问题表

@@ -239,7 +239,13 @@ if __name__ == "__main__":
                     w.write("%s\n" % json.dumps(crawled))
                 except BaseException as e:
                     print('='*40)
-                    print(e)
+                    try:
+                        print(e)
+                    except BaseException:
+                        continue
                     pool.angry()
                     continue
+    # data = crawl(pool.driver, '0', 'When to repair or replace the auto glass ?')
+    # print('='*40)
+    # print(data)
 
